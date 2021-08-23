@@ -7,7 +7,7 @@ Dim xMWS As Worksheet
 Dim xTWB As Workbook
 Dim xStrAWBName As String
 On Error Resume Next
-xStrPath = "put path here"
+xStrPath = "C:\insert\path\here"
 xStrFName = Dir(xStrPath & "*.xlsx")
 Application.ScreenUpdating = False
 Application.DisplayAlerts = False
