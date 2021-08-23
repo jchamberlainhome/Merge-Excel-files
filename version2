@@ -1,0 +1,28 @@
+Sub MergeWorkbooks()
+'Updated by 2/20/2019
+Dim xStrPath As String
+Dim xStrFName As String
+Dim xWS As Worksheet
+Dim xMWS As Worksheet
+Dim xTWB As Workbook
+Dim xStrAWBName As String
+On Error Resume Next
+xStrPath = "put path here"
+xStrFName = Dir(xStrPath & "*.xlsx")
+Application.ScreenUpdating = False
+Application.DisplayAlerts = False
+Set xTWB = ThisWorkbook
+Do While Len(xStrFName) > 0
+    Workbooks.Open Filename:=xStrPath & xStrFName, ReadOnly:=True
+    xStrAWBName = ActiveWorkbook.Name
+    For Each xWS In ActiveWorkbook.Sheets
+    xWS.Copy After:=xTWB.Sheets(xTWB.Sheets.Count)
+    Set xMWS = xTWB.Sheets(xTWB.Sheets.Count)
+    xMWS.Name = xStrAWBName & "(" & xMWS.Name & ")"
+    Next xWS
+    Workbooks(xStrAWBName).Close
+    xStrFName = Dir()
+Loop
+Application.ScreenUpdating = True
+Application.DisplayAlerts = True
+End Sub
